@@ -31,7 +31,15 @@
 
 *GATE: Must pass before Phase 0 research. Re-check after Phase 1 design.*
 
-[Gates determined based on constitution file]
+- Simplicity First: design avoids unnecessary abstractions and speculative components.
+- POC-Focused Development: scope targets capability demonstration, not production hardening.
+- In-Memory Data Only: persistence uses EF Core InMemory with no external DB dependencies.
+- Clean API Design: contracts follow REST methods and accurate HTTP status semantics.
+- Readable Code: responsibilities are split into small, focused units with clear names.
+- Default Seed Data: startup includes deterministic sample product data without manual setup.
+- Minimal Dependencies: new libraries are justified only when built-in .NET features are insufficient.
+- Folder Structure: implementation maps to Controllers, Services, Data, and Models.
+- Done Criteria Coverage: plan includes endpoint readiness, in-memory persistence, seeding, and validation.
 
 ## Project Structure
 
@@ -89,6 +97,13 @@ api/
 
 ios/ or android/
 └── [platform-specific structure: feature modules, UI flows, platform tests]
+
+# [REMOVE IF UNUSED] Option 4: .NET Web API POC (SpecDemoPOC)
+SpecDemoPOC/
+├── Controllers/
+├── Services/
+├── Data/
+└── Models/
 ```
 
 **Structure Decision**: [Document the selected structure and reference the real

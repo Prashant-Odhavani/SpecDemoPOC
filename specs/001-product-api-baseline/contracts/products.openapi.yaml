@@ -1,0 +1,179 @@
+openapi: 3.0.3
+info:
+  title: Product Management API (Baseline)
+  version: 1.0.0
+  description: Baseline CRUD API for products backed by in-memory storage.
+servers:
+  - url: http://localhost:5118
+paths:
+  /api/products:
+    get:
+      summary: List products
+      operationId: listProducts
+      responses:
+        '200':
+          description: Product list
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Product'
+    post:
+      summary: Create product
+      description: Server generates product id; client-supplied id is rejected.
+      operationId: createProduct
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateOrUpdateProduct'
+      responses:
+        '201':
+          description: Product created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Product'
+        '400':
+          description: Validation failure
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+  /api/products/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          minimum: 1
+    get:
+      summary: Get product by id
+      operationId: getProductById
+      responses:
+        '200':
+          description: Product found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Product'
+        '404':
+          description: Product not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+    put:
+      summary: Full update product
+      description: Full update semantics; required fields must be present.
+      operationId: updateProduct
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateOrUpdateProduct'
+      responses:
+        '200':
+          description: Product updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Product'
+        '400':
+          description: Validation failure
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '404':
+          description: Product not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+    delete:
+      summary: Delete product
+      operationId: deleteProduct
+      responses:
+        '204':
+          description: Product deleted
+        '404':
+          description: Product not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+components:
+  schemas:
+    Product:
+      type: object
+      required:
+        - id
+        - name
+        - price
+        - quantity
+      properties:
+        id:
+          type: integer
+          minimum: 1
+        name:
+          type: string
+          minLength: 1
+        description:
+          type: string
+          nullable: true
+        price:
+          type: number
+          format: decimal
+          exclusiveMinimum: 0
+        quantity:
+          type: integer
+          minimum: 0
+    CreateOrUpdateProduct:
+      type: object
+      required:
+        - name
+        - price
+        - quantity
+      properties:
+        id:
+          type: integer
+          nullable: true
+          description: Must not be supplied on create.
+        name:
+          type: string
+          minLength: 1
+        description:
+          type: string
+          nullable: true
+        price:
+          type: number
+          format: decimal
+          exclusiveMinimum: 0
+        quantity:
+          type: integer
+          minimum: 0
+      additionalProperties: false
+    ProblemDetails:
+      type: object
+      properties:
+        type:
+          type: string
+          nullable: true
+        title:
+          type: string
+          nullable: true
+        status:
+          type: integer
+          nullable: true
+        detail:
+          type: string
+          nullable: true
+        instance:
+          type: string
+          nullable: true
+      additionalProperties: true

@@ -49,8 +49,8 @@ description: "Task list template for feature implementation"
 **Purpose**: Project initialization and basic structure
 
 - [ ] T001 Create project structure per implementation plan
-- [ ] T002 Initialize [language] project with [framework] dependencies
-- [ ] T003 [P] Configure linting and formatting tools
+- [ ] T002 Initialize project with minimum required framework dependencies
+- [ ] T003 [P] Establish baseline API routing and request pipeline
 
 ---
 
@@ -62,12 +62,12 @@ description: "Task list template for feature implementation"
 
 Examples of foundational tasks (adjust based on your project):
 
-- [ ] T004 Setup database schema and migrations framework
-- [ ] T005 [P] Implement authentication/authorization framework
-- [ ] T006 [P] Setup API routing and middleware structure
-- [ ] T007 Create base models/entities that all stories depend on
-- [ ] T008 Configure error handling and logging infrastructure
-- [ ] T009 Setup environment configuration management
+- [ ] T004 Configure in-memory data context and runtime persistence behavior
+- [ ] T005 [P] Implement deterministic default seed data at startup
+- [ ] T006 [P] Define API contracts with proper HTTP method/status semantics
+- [ ] T007 Create base models/entities and service abstractions for core stories
+- [ ] T008 Configure validation and consistent error response handling
+- [ ] T009 Setup minimal logging and configuration needed for the POC
 
 **Checkpoint**: Foundation ready - user story implementation can now begin in parallel
 
@@ -249,3 +249,4 @@ With multiple developers:
 - Commit after each task or logical group
 - Stop at any checkpoint to validate story independently
 - Avoid: vague tasks, same file conflicts, cross-story dependencies that break independence
+- Respect constitution constraints (simplicity, in-memory data only, default seed data, minimal dependencies)
