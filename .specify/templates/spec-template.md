@@ -95,6 +95,21 @@
 - **FR-006**: System MUST authenticate users via [NEEDS CLARIFICATION: auth method not specified - email/password, SSO, OAuth?]
 - **FR-007**: System MUST retain user data for [NEEDS CLARIFICATION: retention period not specified]
 
+### Constitution-Derived Requirements *(mandatory)*
+
+<!--
+  ACTION REQUIRED: Add explicit requirements that prove constitution compliance.
+  Replace placeholders with concrete, testable statements relevant to this feature.
+-->
+
+- **CR-001 (Simplicity)**: Solution MUST [describe minimal design and explicitly rejected complexity].
+- **CR-002 (POC Scope)**: Solution MUST [define capability-demo scope and out-of-scope production concerns].
+- **CR-003 (Data Constraint)**: Solution MUST [use in-memory data only, if the feature touches persistence].
+- **CR-004 (API Semantics)**: Endpoints MUST [state REST behavior and expected status code handling].
+- **CR-005 (Readability)**: Implementation MUST [state naming/method-size constraints or equivalent code clarity rules].
+- **CR-006 (Seed Data)**: Application startup MUST [state required default sample data behavior, if applicable].
+- **CR-007 (Dependencies)**: Feature MUST [justify any new dependency or confirm built-in platform usage].
+
 ### Key Entities *(include if feature involves data)*
 
 - **[Entity 1]**: [What it represents, key attributes without implementation]
